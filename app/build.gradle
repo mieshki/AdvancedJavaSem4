@@ -1,0 +1,22 @@
+plugins {
+    id 'java'
+}
+
+group 'pl.jazapp.app'
+version '1.0-SNAPSHOT'
+
+// default 1.8
+sourceCompatibility = 11
+
+repositories {
+    mavenCentral()
+    // maven { url = "https://nasze-repo" }
+}
+
+dependencies {
+    // todo: testImplementation >> lepsze, sprawdzic czemu
+    // groupId::artifactdId::version
+    // test mowi o scope'ie, tzn ze bedzie dostepna tylko w scopie 'test'
+    // te ktore nie maja przedrostka sa w mainie by default
+    testImplementation 'junit:junit:4.12'
+}

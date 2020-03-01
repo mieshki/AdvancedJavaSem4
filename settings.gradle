@@ -1,0 +1,5 @@
+rootProject.name = 'jazapp-java'
+
+// :nazwa_modulu << musi sie zgadzac z nazwa naszego modulu
+include ':app'
+
