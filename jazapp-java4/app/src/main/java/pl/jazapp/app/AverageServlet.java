@@ -17,7 +17,7 @@ class Formatter {
     }
 }
 
-@WebServlet("average")
+@WebServlet("average") 
 public class AverageServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
