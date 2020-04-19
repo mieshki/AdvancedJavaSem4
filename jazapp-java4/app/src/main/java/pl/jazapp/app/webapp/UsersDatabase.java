@@ -10,7 +10,7 @@ public class UsersDatabase {
     private static ArrayList<User> allUsers = new ArrayList<User>(){};
 
     public static boolean addNewUser(RegisterRequest registerRequest) {
-        User newUser = new User(registerRequest.getUsername(), registerRequest.getPassword());
+        User newUser = new User(registerRequest);
 
         // check if username is already taken
         for (User user : allUsers){

@@ -1,13 +1,11 @@
 package pl.jazapp.app.webapp.register;
 
 import pl.jazapp.app.webapp.UsersDatabase;
-import pl.jazapp.app.webapp.login.HttpResponseHelper;
+import pl.jazapp.app.webapp.HttpResponseHelper;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Named
@@ -26,7 +24,7 @@ public class RegisterController {
 
         if(UsersDatabase.addNewUser(registerRequest))
             return "/login.xhtml?faces-redirect=true";
-        else{
+        else {
             HttpResponseHelper.setResponse(FacesContext.getCurrentInstance(), "Username is already taken.");
             return "/register.xhtml";
         }

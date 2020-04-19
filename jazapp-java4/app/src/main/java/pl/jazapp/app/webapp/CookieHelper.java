@@ -5,6 +5,8 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
+// https://stackoverflow.com/questions/20934016/how-to-add-cookie-in-jsf
 public class CookieHelper {
 
     public static void setCookie(String name, String value, int expiry) {
