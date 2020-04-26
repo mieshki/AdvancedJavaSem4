@@ -6,17 +6,17 @@ import javax.faces.context.FacesContext;
 import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
-import java.util.PropertyResourceBundle;
 
-@FacesValidator("usernameValidator")
-public class UsernameValidator implements Validator<String> {
-    public static final String CAN_CONTAIN_ONLY_SMALL_LETTERS_AND_NUMBERS_MESSAGE_ID
-            = "pl.register.validator.CAN_CONTAIN_ONLY_NUMBERS_AND_SMALL_LETTERS";
+@FacesValidator("registerpasswordValidator")
+public class RegisterPasswordValidator implements Validator<String> {
+
+    public static final String REGISTER_PASSWORD_CONDITIONS
+            = "pl.register.validator.REGISTER_PASSWORD_CONDITIONS";
 
     @Override
     public void validate(FacesContext context, UIComponent component, String value) throws ValidatorException {
-        if(!value.matches("[a-z0-9]*")){
-            var messageString = ContextMessagesHelper.getMsg(context).getString(CAN_CONTAIN_ONLY_SMALL_LETTERS_AND_NUMBERS_MESSAGE_ID);
+        if(!value.matches("(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9!@#$%^&*])")){
+            var messageString = ContextMessagesHelper.getMsg(context).getString(REGISTER_PASSWORD_CONDITIONS);
             throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "", messageString));
         }
     }

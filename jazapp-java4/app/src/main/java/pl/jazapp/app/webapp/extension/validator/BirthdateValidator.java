@@ -6,17 +6,17 @@ import javax.faces.context.FacesContext;
 import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
-import java.util.PropertyResourceBundle;
 
-@FacesValidator("usernameValidator")
-public class UsernameValidator implements Validator<String> {
-    public static final String CAN_CONTAIN_ONLY_SMALL_LETTERS_AND_NUMBERS_MESSAGE_ID
-            = "pl.register.validator.CAN_CONTAIN_ONLY_NUMBERS_AND_SMALL_LETTERS";
+@FacesValidator("birthdateValidator")
+public class BirthdateValidator implements Validator<String> {
+
+    public static final String WRONG_DATE_FORMAT
+            = "pl.register.validator.WRONG_DATE_FORMAT";
 
     @Override
     public void validate(FacesContext context, UIComponent component, String value) throws ValidatorException {
-        if(!value.matches("[a-z0-9]*")){
-            var messageString = ContextMessagesHelper.getMsg(context).getString(CAN_CONTAIN_ONLY_SMALL_LETTERS_AND_NUMBERS_MESSAGE_ID);
+        if(!value.matches("^\\d{1,2}\\/\\d{1,2}\\/\\d{4}$")){
+            var messageString = ContextMessagesHelper.getMsg(context).getString(WRONG_DATE_FORMAT);
             throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "", messageString));
         }
     }

@@ -18,7 +18,7 @@
         <div class="form-group">
             <h:inputText id="login" styleClass="form-control" a:placeholder="Username"
                          value="#{loginRequest.username}" >
-                <f:validateLength minimum="1" maximum="25"/>
+                <f:validator validatorId="loginAndPasswordValidator" for="login"/>
             </h:inputText>
             <h:message errorClass="error-message" for="login"/>
         </div>
@@ -26,7 +26,7 @@
         <div class="form-group">
             <h:inputSecret id="password" styleClass="form-control" a:placeholder="Password"
                            value="#{loginRequest.password}" >
-                <f:validateLength minimum="1" maximum="25"/>
+                <f:validator validatorId="loginAndPasswordValidator" for="password"/>
             </h:inputSecret>
             <h:message errorClass="error-message" for="password"/>
         </div>

@@ -32,32 +32,41 @@
         <div class="form-group">
             <h:inputText id="first-name" styleClass="form-control" a:placeholder="First name"
                          value="#{registerRequest.name}" >
-
+                <f:validator validatorId="firstnameValidator" for="first-name"/>
             </h:inputText>
+            <h:message errorClass="error-message" for="first-name"/>
         </div>
 
         <div class="form-group">
             <h:inputText id="last-name" styleClass="form-control" a:placeholder="Last name"
-                         value="#{registerRequest.surname}" />
+                         value="#{registerRequest.surname}">
+                <f:validator validatorId="lastnameValidator" for="last-name"/>
+            </h:inputText>
+            <h:message errorClass="error-message" for="last-name"/>
         </div>
 
         <div class="form-group">
             <h:inputText id="birthdate" styleClass="form-control" a:placeholder="Birthdate"
                          value="#{registerRequest.birthdate}" >
+                <f:validator validatorId="birthdateValidator" for="birthdate"/>
             </h:inputText>
+            <h:message errorClass="error-message" for="birthdate"/>
         </div>
 
         <div class="form-group">
             <h:inputSecret id="password" styleClass="form-control" a:placeholder="Password"
                            value="#{registerRequest.password}" >
-                <f:validateLength minimum="1" maximum="25"/>
+                <f:validator validatorId="registerpasswordValidator" for="password"/>
             </h:inputSecret>
             <h:message errorClass="error-message" for="password"/>
         </div>
 
         <div class="form-group">
-            <h:inputSecret id="password-repeat" styleClass="form-control" a:placeholder="Repeat password"
-                           value="#{registerRequest.passwordRepeated}" />
+            <h:inputSecret id="password-check" styleClass="form-control" a:placeholder="Repeat password"
+                           value="#{registerRequest.passwordRepeated}" >
+                <f:validator validatorId="registerpasswordValidator" for="password-check"/>
+            </h:inputSecret>
+            <h:message errorClass="error-message" for="password-check"/>
         </div>
 
         <h:commandButton styleClass="btn btn-primary" value="Register" action="#{registerController.register(registerRequest)}"/><br/>

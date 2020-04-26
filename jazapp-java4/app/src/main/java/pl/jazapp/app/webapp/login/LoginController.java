@@ -24,8 +24,6 @@ public class LoginController {
 
             return "/index.xhtml";
         } else {
-            //FacesContext.getCurrentInstance().getExternalContext().getFlash()
-            //        .put("error-message", "Wrong username or password.");
             HttpResponseHelper.setResponse(FacesContext.getCurrentInstance(), "Wrong username or password.");
             return "/login.xhtml?faces-redirect=true";
         }

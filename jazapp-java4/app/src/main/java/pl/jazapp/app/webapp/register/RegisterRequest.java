@@ -10,7 +10,7 @@ public class RegisterRequest {
     private String email;
     private String name;
     private String surname;
-    private String birtdate;
+    private String birthdate;
     private String password;
     private String passwordRepeated;
 
@@ -63,10 +63,10 @@ public class RegisterRequest {
     }
 
     public String getBirthdate() {
-        return birtdate;
+        return birthdate;
     }
 
     public void setBirthdate(String birtdate) {
-        this.birtdate = birtdate;
+        this.birthdate = birtdate;
     }
 }
