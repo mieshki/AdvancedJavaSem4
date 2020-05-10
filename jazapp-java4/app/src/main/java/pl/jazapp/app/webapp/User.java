@@ -2,6 +2,7 @@ package pl.jazapp.app.webapp;
 
 import pl.jazapp.app.webapp.register.RegisterRequest;
 
+
 public class User {
 
     public User (RegisterRequest req){

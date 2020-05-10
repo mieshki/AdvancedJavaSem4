@@ -22,13 +22,18 @@ public class UsersDatabase {
         return true;
     }
 
+    public static User findUserByLogin(String login)
+    {
+        for (User user : allUsers){
+            if(user.getUsername().equals(login))
+                return user;
+        }
+        return null;
+    }
+
     public static boolean checkCredentials(LoginRequest loginRequest){
         for (User user : allUsers){
-            if(user.getUsername().equals(loginRequest.getUsername()) && user.getPassword().equals(loginRequest.getPassword())){
-                return true;
-            }
-
-            return false;
+            return user.getUsername().equals(loginRequest.getUsername()) && user.getPassword().equals(loginRequest.getPassword());
         }
 
         return true;

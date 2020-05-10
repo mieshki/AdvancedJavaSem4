@@ -15,7 +15,8 @@ public class RegisterPasswordValidator implements Validator<String> {
 
     @Override
     public void validate(FacesContext context, UIComponent component, String value) throws ValidatorException {
-        if(!value.matches("(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9!@#$%^&*])")){
+        //if(!value.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9!@#$%^&*])")){
+        if(!value.matches("^(?=.*\\p{Ll})(?=.*[\\!\\@\\#\\$\\%\\^\\&\\*\\(\\)\\_\\+\\-\\=0-9])(?=.*[\\p{Lu}])(?!.*\\s).{3,}$")){
             var messageString = ContextMessagesHelper.getMsg(context).getString(REGISTER_PASSWORD_CONDITIONS);
             throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "", messageString));
         }

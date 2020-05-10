@@ -21,7 +21,7 @@ public class SecurityFilter extends HttpFilter {
         // let resources be possible to access without permissions
         if (isResourceRequest(req)){
             chain.doFilter(req, res);
-        } else if (isUserLogged(req) || isSiteAllowed(req)){
+        } else if (isSiteAllowed(req) || isUserLogged(req)){
             chain.doFilter(req, res);
         } else {
             res.sendRedirect(req.getContextPath() + "/login.xhtml");
@@ -29,7 +29,7 @@ public class SecurityFilter extends HttpFilter {
     }
 
     private boolean isResourceRequest(HttpServletRequest req) {
-        return req.getServletPath().startsWith(req.getContextPath() + ResourceHandler.RESOURCE_IDENTIFIER + "/");
+        return req.getServletPath().startsWith(ResourceHandler.RESOURCE_IDENTIFIER + "/");
     }
 
     private boolean isSiteAllowed(HttpServletRequest req) {
@@ -43,7 +43,7 @@ public class SecurityFilter extends HttpFilter {
     }
 
     public boolean isUserLogged(HttpServletRequest req) {
-        /*Cookie[] cookies = req.getCookies();
+        Cookie[] cookies = req.getCookies();
 
         if(cookies != null){
             for(Cookie cookie : cookies){
@@ -54,7 +54,6 @@ public class SecurityFilter extends HttpFilter {
             }
         }
 
-        return false;*/
-        return true;
+        return false;
     }
 }

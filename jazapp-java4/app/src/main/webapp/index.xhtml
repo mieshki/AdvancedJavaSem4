@@ -11,6 +11,10 @@
 </h:head>
 
 <h:body>
-    <h3>Hello from index</h3>
+    <h:outputText value="${userContext.fullName}" />
+    <h:form styleClass="form-base">
+        <h:commandButton styleClass="btn btn-primary" value="Logout" action="#{logoutController.logout()}"/><br/>
+    </h:form>
+
 </h:body>
 </html>

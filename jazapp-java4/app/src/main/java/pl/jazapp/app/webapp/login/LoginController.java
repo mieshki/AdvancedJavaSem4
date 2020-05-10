@@ -1,8 +1,6 @@
 package pl.jazapp.app.webapp.login;
 
-import pl.jazapp.app.webapp.CookieHelper;
-import pl.jazapp.app.webapp.HttpResponseHelper;
-import pl.jazapp.app.webapp.UsersDatabase;
+import pl.jazapp.app.webapp.*;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
@@ -20,7 +18,11 @@ public class LoginController {
         boolean canLogin = UsersDatabase.checkCredentials(loginRequest);
 
         if (canLogin) {
-            CookieHelper.setCookie("MYSESSIONID", UUID.randomUUID().toString(), 600);
+            CookieHelper.setCookie("MYSESSIONID", UUID.randomUUID().toString(), 5);
+            User user = UsersDatabase.findUserByLogin(loginRequest.getUsername());
+            if(user != null){
+                UserContext.setFullName(String.format("%s %s", user.getName(), user.getSurname()));
+            }
 
             return "/index.xhtml";
         } else {

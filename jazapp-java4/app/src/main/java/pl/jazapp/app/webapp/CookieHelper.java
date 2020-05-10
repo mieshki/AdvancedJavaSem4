@@ -57,4 +57,14 @@ public class CookieHelper {
         }
         return null;
     }
+
+    public static void deleteCookie(String cookieName)
+    {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+
+        Cookie cookie = getCookie(cookieName);
+        cookie.setMaxAge(0);
+        HttpServletResponse response = (HttpServletResponse) facesContext.getExternalContext().getResponse();
+        response.addCookie(cookie);
+    }
 }
