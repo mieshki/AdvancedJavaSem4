@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20200523_init
+      author: Mieszko Dziadowiec
+      sqlFile:
+        relativeToChangelogFile: true
+        splitStatements: false
+        path: 20200523_init.sql
