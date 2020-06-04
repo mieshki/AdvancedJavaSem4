@@ -9,8 +9,8 @@ import liquibase.resource.ClassLoaderResourceAccessor;
 import liquibase.resource.ResourceAccessor;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Produces;
 import javax.sql.DataSource;
-import javax.ws.rs.Produces;
 
 @ApplicationScoped
 public class LiquibaseConfig {
