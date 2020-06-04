@@ -25,8 +25,13 @@ public class AverageServlet extends HttpServlet {
         resp.setContentType("text/plain");
 
         String numbers = req.getParameter("numbers");
-        String[] splittedNumbers = numbers.split(",");
 
+        if(numbers == null){
+            resp.getWriter().println("Please put parameters.");
+            return;
+        }
+
+        String[] splittedNumbers = numbers.split(",");
 
         int numbersCount = splittedNumbers.length;
 
@@ -41,7 +46,5 @@ public class AverageServlet extends HttpServlet {
 
         if(numbersCount > 0)
             resp.getWriter().println("Average equals: " + Formatter.formatNumber(average));
-        else
-            resp.getWriter().println("Please put parameters.");
     }
 }
