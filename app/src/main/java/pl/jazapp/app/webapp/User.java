@@ -1,16 +1,26 @@
 package pl.jazapp.app.webapp;
 
+import pl.jazapp.app.users.UserEntity;
 import pl.jazapp.app.webapp.register.RegisterRequest;
 
 
 public class User {
+
+    public User (UserEntity user){
+        this.username = user.getUsername();
+        this.email = user.getEmail();
+        this.name = user.getEmail();
+        this.surname = user.getLast_name();
+        this.birthdate = user.getBirthday();
+        this.password = user.getPassword();
+    }
 
     public User (RegisterRequest req){
         this.username = req.getUsername();
         this.email = req.getEmail();
         this.name = req.getName();
         this.surname = req.getSurname();
-        this.birtdate = req.getBirthdate();
+        this.birthdate = req.getBirthdate();
         this.password = req.getPassword();
     }
 
@@ -18,7 +28,7 @@ public class User {
     private String email;
     private String name;
     private String surname;
-    private String birtdate;
+    private String birthdate;
     private String password;
 
     public String getUsername() {
@@ -61,11 +71,11 @@ public class User {
         this.surname = surname;
     }
 
-    public String getBirtdate() {
-        return birtdate;
+    public String getBirthdate() {
+        return birthdate;
     }
 
-    public void setBirtdate(String birtdate) {
-        this.birtdate = birtdate;
+    public void setBirthdate(String birthdate) {
+        this.birthdate = birthdate;
     }
 }
