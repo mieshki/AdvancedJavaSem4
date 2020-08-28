@@ -19,4 +19,12 @@ public class UserSearchService {
                 .findFirst();
     }
 
+    @Transactional
+    public Optional<UserEntity> findUser(Long id) {
+        return em.createQuery("from UserEntity where id = :id", UserEntity.class)
+                .setParameter("id", id)
+                .getResultList().stream()
+                .findFirst();
+    }
+
 }

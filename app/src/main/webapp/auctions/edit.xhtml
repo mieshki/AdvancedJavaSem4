@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+<h:head>
+    <h:outputStylesheet name="bootstrap.min.css" library="css"/>
+</h:head>
+
+<h:body>
+    <f:metadata>
+        <f:viewParam name="auctionId" value="#{auctionRequest.id}"/>
+    </f:metadata>
+
+    <h:form styleClass="form-base">
+        <h:outputText value="Nazwa aukcji:" />
+        <div class="form-group">
+            <h:inputText id="title" styleClass="form-control" a:placeholder="tytul aukcji" value="#{auctionRequest.title}"/>
+        </div>
+
+        <h:outputText value="Tytuł aukcji:" />
+        <div class="form-group">
+            <h:inputText id="description" styleClass="form-control" a:placeholder="opis aukcji" value="#{auctionRequest.description}"/>
+        </div>
+
+        <h:outputText value="Cena aukcji:" />
+        <div class="form-group">
+            <h:inputText id="price" styleClass="form-control" a:placeholder="cena aukcji" value="#{auctionRequest.price}"/>
+        </div>
+
+        <h:outputText value="Wybierz dział:" />
+        <div class="form-group">
+            <h:selectOneMenu id="department" value="#{auctionRequest.department_id}">
+                <f:selectItems value="#{departmentsManager.allDepartments}"
+                               var ="department"
+                               itemLabel="#{department.name}"
+                               itemValue="#{department.id}"/>
+                <f:ajax event="change" execute="@this" render="category"/>
+            </h:selectOneMenu>
+        </div>
+
+        <h:outputText value="Wybierz kategorie:" />
+        <div class="form-group">
+            <h:selectOneMenu id="category" value="#{auctionRequest.category_id}">
+                <f:selectItems value="#{categoriesManager.getAllCategoriesOfSpecifiedDepartment(auctionRequest.department_id)}"
+                               var ="category"
+                               itemLabel="#{category.name}"
+                               itemValue="#{category.id}"/>
+            </h:selectOneMenu>
+        </div>
+
+        <h:outputText value="Linki zdjec:" />
+        <div class="form-group">
+            <h:inputText id="photos-urls" styleClass="form-control" a:placeholder="linki zdjec" value="#{auctionRequest.photos_urls}"/>
+        </div>
+
+        <h:commandButton id="save" styleClass="btn btn-primary" value="Save" action="#{auctionsManager.addAuction(auctionRequest)}"/><br/>
+    </h:form>
+    <h:outputText value="#{param['auctionId']}" />
+</h:body>
+</html>

@@ -15,4 +15,6 @@ public class UserContext implements Serializable {
     public static void setFullName(String newFullName){
         fullName = newFullName;
     }
+    //public static User actualUser;
+    //public static void setActualUser()
 }

@@ -11,9 +11,9 @@
 </h:head>
 
 <h:body>
-    <h:outputText value="${userContext.fullName}" />
-    <h:form styleClass="form-base">
-        <h:commandButton styleClass="btn btn-primary" value="Logout" action="#{logoutController.logout()}"/><br/>
-    </h:form>
+    <h:outputText value="Wszystkie dostępne kategorie:" /><br />
+    <ui:repeat value="#{categoriesManager.allCategories}" var="category">
+        <h:link value="#{category.id} - #{category.name} - #{category.department_id.id}" id="category-#{category.id}" outcome="edit.xhtml?categoryId=#{category.id}"/><br/>
+    </ui:repeat>
 </h:body>
 </html>

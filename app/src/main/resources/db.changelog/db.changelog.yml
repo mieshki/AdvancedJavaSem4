@@ -13,3 +13,10 @@ databaseChangeLog:
         relativeToChangelogFile: true
         splitStatements: false
         path: 20200604_init.sql
+  - changeSet:
+      id: zad4_init
+      author: Mieszko Dziadowiec
+      sqlFile:
+        relativeToChangelogFile: true
+        splitStatements: false
+        path: zad4_init.sql

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+<h:head>
+    <h:outputStylesheet name="bootstrap.min.css" library="css"/>
+</h:head>
+
+<h:body>
+    <f:metadata>
+        <f:viewParam name="departmentId" value="#{departmentRequest.id}"/>
+    </f:metadata>
+
+    <h:form styleClass="form-base">
+        <h:outputText value="Nazwa działu:" />
+        <div class="form-group">
+            <h:inputText id="name" styleClass="form-control" a:placeholder="#{departmentsManager.findDepartmentByIdAndReturnItsName(param['departmentId'])}"
+                         value="#{departmentRequest.name}">
+                <!--<f:validator validatorId="loginAndPasswordValidator" for="name"/>-->
+            </h:inputText>
+            <h:message errorClass="error-message" for="name"/>
+        </div>
+        <h:commandButton id="save" styleClass="btn btn-primary" value="Save" action="#{departmentsManager.addNewDepartment(departmentRequest)}"/><br/>
+    </h:form>
+    <h:outputText value="#{param['departmentId']}" />
+</h:body>
+</html>

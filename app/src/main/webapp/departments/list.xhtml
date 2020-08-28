@@ -11,9 +11,9 @@
 </h:head>
 
 <h:body>
-    <h:outputText value="${userContext.fullName}" />
-    <h:form styleClass="form-base">
-        <h:commandButton styleClass="btn btn-primary" value="Logout" action="#{logoutController.logout()}"/><br/>
-    </h:form>
+    <h:outputText value="Wszystkie dostępne działy:" /><br />
+    <ui:repeat value="#{departmentsManager.allDepartments}" var="department">
+            <h:link value="#{department.name} - #{department.id}" id="department-#{department.id}" outcome="edit.xhtml?departmentId=#{department.id}"/><br/>
+    </ui:repeat>
 </h:body>
 </html>

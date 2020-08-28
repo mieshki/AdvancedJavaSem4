@@ -31,7 +31,7 @@ public class LoginController {
 
             UserContext.setFullName(welcomeString);
 
-            return "/index.xhtml";
+            return "/";
         } else {
             HttpResponseHelper.setResponse(FacesContext.getCurrentInstance(), "Wrong username or password.");
             return "/login.xhtml?faces-redirect=true";

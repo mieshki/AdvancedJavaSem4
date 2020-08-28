@@ -1,14 +1,22 @@
 package pl.jazapp.app.users;
 
+import pl.jazapp.app.webapp.Auctions.AuctionEntity;
+import pl.jazapp.app.webapp.Categories.CategoryEntity;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+
     @Column(name = "id")
     private Long id;
+
+    @OneToMany(mappedBy = "owner")
+    private List<AuctionEntity> auctions;
 
     @Column(name = "username")
     private String username;
