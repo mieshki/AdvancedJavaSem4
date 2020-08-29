@@ -1,7 +1,7 @@
-package pl.jazapp.app.webapp.Auctions;
+package pl.jazapp.app.Auctions;
 
 import pl.jazapp.app.users.UserEntity;
-import pl.jazapp.app.webapp.Categories.CategoryEntity;
+import pl.jazapp.app.Categories.CategoryEntity;
 
 import javax.persistence.*;
 import java.math.BigDecimal;

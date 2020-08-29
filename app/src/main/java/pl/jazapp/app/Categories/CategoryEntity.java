@@ -1,6 +1,6 @@
-package pl.jazapp.app.webapp.Categories;
+package pl.jazapp.app.Categories;
 
-import pl.jazapp.app.webapp.Departaments.DepartmentEntity;
+import pl.jazapp.app.Departments.DepartmentEntity;
 
 import javax.persistence.*;
 

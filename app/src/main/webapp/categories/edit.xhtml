@@ -21,19 +21,17 @@
         <div class="form-group">
             <h:inputText id="name" styleClass="form-control" a:placeholder="#{categoriesManager.findCategoryByIdAndReturnItsName(param['categoryId'])}"
                          value="#{categoriesRequest.name}">
-                <!--<f:validator validatorId="loginAndPasswordValidator" for="name"/>-->
+                <!--<f:validator validatorId="loginAndPasswdeordValidator" for="name"/>-->
             </h:inputText>
 
             <div class="form-group">
-                <h:selectOneMenu id="category" value="#{categoriesRequest.department_id}">
+                <h:selectOneMenu id="department" value="#{categoriesRequest.department_id}">
                     <f:selectItems value="#{departmentsManager.allDepartments}"
                                    var ="department"
                                    itemLabel="#{department.name}"
                                    itemValue="#{department.id}"/>
                 </h:selectOneMenu>
             </div>
-
-            <h:message errorClass="error-message" for="name"/>
         </div>
         <h:commandButton id="save" styleClass="btn btn-primary" value="Save" action="#{categoriesManager.addCategory(categoriesRequest)}"/><br/>
     </h:form>

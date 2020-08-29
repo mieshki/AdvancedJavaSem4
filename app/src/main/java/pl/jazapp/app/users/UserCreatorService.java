@@ -26,6 +26,8 @@ public class UserCreatorService {
         userEntity.setFirst_name(req.getName());
         userEntity.setLast_name(req.getSurname());
 
+        userEntity.setRole("DEFAULT");
+
         var isPasswordCorrect = passwordEncoder.matches(req.getPassword(), userEntity.getPassword());
         /*if(!isPasswordCorrect){
             throw new Exception();

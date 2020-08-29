@@ -1,7 +1,4 @@
-package pl.jazapp.app.webapp.Departaments;
-
-import pl.jazapp.app.users.UserEntity;
-import pl.jazapp.app.webapp.register.RegisterRequest;
+package pl.jazapp.app.Departments;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;

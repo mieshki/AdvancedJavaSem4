@@ -16,13 +16,15 @@
         <f:viewParam name="auctionId" value="#{auctionRequest.id}"/>
     </f:metadata>
 
+    <f:event type="preRenderView" listener="#{auctionsManager.isUserOwner(auctionRequest)}"/>
+
     <h:form styleClass="form-base">
         <h:outputText value="Nazwa aukcji:" />
         <div class="form-group">
             <h:inputText id="title" styleClass="form-control" a:placeholder="tytul aukcji" value="#{auctionRequest.title}"/>
         </div>
 
-        <h:outputText value="Tytuł aukcji:" />
+        <h:outputText value="Opis aukcji:" />
         <div class="form-group">
             <h:inputText id="description" styleClass="form-control" a:placeholder="opis aukcji" value="#{auctionRequest.description}"/>
         </div>
@@ -32,30 +34,19 @@
             <h:inputText id="price" styleClass="form-control" a:placeholder="cena aukcji" value="#{auctionRequest.price}"/>
         </div>
 
-        <h:outputText value="Wybierz dział:" />
+        <h:outputText value="Link do zdjecia:" />
         <div class="form-group">
-            <h:selectOneMenu id="department" value="#{auctionRequest.department_id}">
-                <f:selectItems value="#{departmentsManager.allDepartments}"
-                               var ="department"
-                               itemLabel="#{department.name}"
-                               itemValue="#{department.id}"/>
-                <f:ajax event="change" execute="@this" render="category"/>
-            </h:selectOneMenu>
+            <h:inputText id="photo-link-1" styleClass="form-control" a:placeholder="link zdjecia" value="#{auctionRequest.photos_urls}"/>
         </div>
 
         <h:outputText value="Wybierz kategorie:" />
         <div class="form-group">
             <h:selectOneMenu id="category" value="#{auctionRequest.category_id}">
-                <f:selectItems value="#{categoriesManager.getAllCategoriesOfSpecifiedDepartment(auctionRequest.department_id)}"
+                <f:selectItems value="#{categoriesManager.getAllCategories()}"
                                var ="category"
                                itemLabel="#{category.name}"
                                itemValue="#{category.id}"/>
             </h:selectOneMenu>
-        </div>
-
-        <h:outputText value="Linki zdjec:" />
-        <div class="form-group">
-            <h:inputText id="photos-urls" styleClass="form-control" a:placeholder="linki zdjec" value="#{auctionRequest.photos_urls}"/>
         </div>
 
         <h:commandButton id="save" styleClass="btn btn-primary" value="Save" action="#{auctionsManager.addAuction(auctionRequest)}"/><br/>

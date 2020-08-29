@@ -1,6 +1,8 @@
 package pl.jazapp.app;
 
 import pl.jazapp.app.webapp.CookieHelper;
+import pl.jazapp.app.webapp.User;
+import pl.jazapp.app.webapp.UserContext;
 
 import javax.faces.application.ResourceHandler;
 import javax.servlet.FilterChain;
@@ -21,11 +23,28 @@ public class SecurityFilter extends HttpFilter {
         // let resources be possible to access without permissions
         if (isResourceRequest(req)){
             chain.doFilter(req, res);
-        } else if (isSiteAllowed(req) || isUserLogged(req)){
+        } else if(isSiteOnlyForAdministrator(req) && UserContext.getRole().contains("ADMIN") && isUserLogged(req)) {
+            chain.doFilter(req, res);
+        } else if ((isSiteAllowed(req) || isUserLogged(req)) && !isSiteOnlyForAdministrator(req)){
             chain.doFilter(req, res);
         } else {
-            res.sendRedirect(req.getContextPath() + "/login.xhtml");
+            if(isUserLogged(req)) {
+                res.sendRedirect(req.getContextPath() + "/");
+            }
+            else {
+                res.sendRedirect(req.getContextPath() + "/login.xhtml");
+            }
         }
+    }
+
+    private boolean isSiteOnlyForAdministrator(HttpServletRequest req){
+        if(req.getServletPath().contains("departments/edit.xhtml")){
+            return true;
+        } else if (req.getServletPath().contains("categories/edit.xhtml")){
+            return true;
+        }
+
+        return false;
     }
 
     private boolean isResourceRequest(HttpServletRequest req) {
@@ -36,6 +55,8 @@ public class SecurityFilter extends HttpFilter {
         switch(req.getServletPath()){
             case "/login.xhtml":
             case "/register.xhtml":
+            case "/index.xhtml":
+            case "":
                 return true;
             default:
                 return false;
@@ -43,7 +64,10 @@ public class SecurityFilter extends HttpFilter {
     }
 
     public boolean isUserLogged(HttpServletRequest req) {
-        /*Cookie[] cookies = req.getCookies();
+        if(!UserContext.isLogged())
+            return false;
+
+        Cookie[] cookies = req.getCookies();
 
         if(cookies != null){
             for(Cookie cookie : cookies){
@@ -54,7 +78,6 @@ public class SecurityFilter extends HttpFilter {
             }
         }
 
-        return false;*/
-        return true;
+        return false;
     }
 }

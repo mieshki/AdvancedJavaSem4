@@ -23,9 +23,9 @@ CREATE TABLE auction
     description VARCHAR(500)   NOT NULL,
     price       DECIMAL(15, 2) NOT NULL,
     category_id BIGINT         NOT NULL,
+    photo_url	VARCHAR(500)   NOT NULL,
     owner_id    BIGINT    	   NOT NULL,
     version     BIGINT         NOT NULL,
-	photo_url   VARCHAR(500)   NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (category_id) REFERENCES category (id),
     FOREIGN KEY (owner_id) REFERENCES users (id)

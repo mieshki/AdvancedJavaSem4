@@ -11,9 +11,37 @@
 </h:head>
 
 <h:body>
-    <h:outputText value="${userContext.fullName}" />
-    <h:form styleClass="form-base">
-        <h:commandButton styleClass="btn btn-primary" value="Logout" action="#{logoutController.logout()}"/><br/>
-    </h:form>
+    <h:outputText value="Wszystkie dostępne aukcje" /><Br />
+    <ui:repeat value="#{auctionsManager.getAllAuctions()}" var="auction">
+        <h:outputText value="Tytuł aukcji: " />
+        <h:outputText id="title-#{auction.id}" value="#{auction.title}" /> <br/>
+
+        <h:outputText value="Opis aukcji: " />
+        <h:outputText id="description-#{auction.id}" value="#{auction.description}" /> <br/>
+
+        <h:outputText value="Cena aukcji: " />
+        <h:outputText id="price-#{auction.id}" value="#{auction.price}" /> <br/>
+
+        <h:outputText value="Zdjecie aukcji: " />
+        <h:graphicImage id="photo-#{auction.id}" url="#{auction.photos_urls}" width="150" height="150" /><Br />
+
+        <h:outputText value="Parametr 1" />
+        <h:outputText value="parametr 1 - value" /> <br/>
+
+        <h:outputText value="Parametr 2" />
+        <h:outputText value="parametr 2 - value" /> <br/>
+
+        <h:outputText value="Parametr 3" />
+        <h:outputText value="parametr 3 - value" /> <br/>
+
+        <h:outputText value="Kategoria aukcji: " />
+        <h:outputText value="#{auction.category.name}" /> <br/>
+
+        <h:link value="Edytuj" id="edit-#{auction.id}" outcome="auctions/edit.xhtml?auctionId=#{auction.id}"/><br/>
+
+        <h:outputText value="---------------------------------------------" /><br />
+    </ui:repeat>
+
+    <h:link value="Dodaj aukcje" outcome="auctions/edit.xhtml"/><br/>
 </h:body>
 </html>

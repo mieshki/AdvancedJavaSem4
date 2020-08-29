@@ -1,4 +1,4 @@
-package pl.jazapp.app.webapp.Departaments;
+package pl.jazapp.app.Departments;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;

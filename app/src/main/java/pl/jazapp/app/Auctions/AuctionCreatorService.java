@@ -1,11 +1,9 @@
-package pl.jazapp.app.webapp.Auctions;
+package pl.jazapp.app.Auctions;
 
 import pl.jazapp.app.users.UserSearchService;
-import pl.jazapp.app.webapp.Categories.CategoriesRequest;
-import pl.jazapp.app.webapp.Categories.CategoryCreatorService;
-import pl.jazapp.app.webapp.Categories.CategoryEntity;
-import pl.jazapp.app.webapp.Categories.CategorySearchService;
-import pl.jazapp.app.webapp.Departaments.DepartmentSearchService;
+import pl.jazapp.app.webapp.Auctions.AuctionRequest;
+import pl.jazapp.app.Categories.CategorySearchService;
+import pl.jazapp.app.webapp.UserContext;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -30,10 +28,25 @@ public class AuctionCreatorService {
         auction.setDescription(req.getDescription());
         auction.setPrice(req.getPrice());
         auction.setCategory(categorySearch.findCategoryById(req.getCategory_id()).get());
-        auction.setOwner(userSearch.findUser(1L).get());
+        auction.setOwner(userSearch.findUser(UserContext.getId()).get());
         auction.setVersion(1L);
-        auction.setPhotos_urls("blablazdjecia");
+        auction.setPhotos_urls(req.getPhotos_urls());
 
         em.persist(auction);
+    }
+
+    @Transactional
+    public void editAuction(AuctionRequest req){
+        var auction = new AuctionEntity();
+        auction.setId(req.getId());
+        auction.setTitle(req.getTitle());
+        auction.setDescription(req.getDescription());
+        auction.setPrice(req.getPrice());
+        auction.setCategory(categorySearch.findCategoryById(req.getCategory_id()).get());
+        auction.setOwner(userSearch.findUser(UserContext.getId()).get());
+        auction.setVersion(1L);
+        auction.setPhotos_urls(req.getPhotos_urls());
+
+        em.merge(auction);
     }
 }

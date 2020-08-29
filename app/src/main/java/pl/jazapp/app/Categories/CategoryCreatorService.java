@@ -1,7 +1,7 @@
-package pl.jazapp.app.webapp.Categories;
+package pl.jazapp.app.Categories;
 
-import pl.jazapp.app.webapp.Departaments.DepartmentEntity;
-import pl.jazapp.app.webapp.Departaments.DepartmentSearchService;
+import pl.jazapp.app.webapp.Categories.CategoriesRequest;
+import pl.jazapp.app.Departments.DepartmentSearchService;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -10,19 +10,19 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
 @ApplicationScoped
-public class CategoryEditService {
+public class CategoryCreatorService {
     @PersistenceContext
     private EntityManager em;
+
     @Inject
     private DepartmentSearchService departmentSearch;
 
     @Transactional
-    public void editCategory(CategoriesRequest req) {
+    public void addCategory(CategoriesRequest req) {
         var category = new CategoryEntity();
-        category.setId(req.getId());
         category.setName(req.getName());
         category.setDepartment_id(departmentSearch.findDepartment(req.getDepartment_id()).get());
 
-        em.merge(category);
+        em.persist(category);
     }
 }

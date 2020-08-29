@@ -25,13 +25,18 @@ public class LoginController {
         boolean canLogin = userLogin.canLoginUser(loginRequest);
 
         if (canLogin) {
-            CookieHelper.setCookie("MYSESSIONID", UUID.randomUUID().toString(), 5);
+            CookieHelper.setCookie("MYSESSIONID", UUID.randomUUID().toString(), 600);
+
+            var user = userLogin.findUser(loginRequest.getUsername()).get();
 
             String welcomeString = userLogin.getWelcomeString(loginRequest);
 
+            UserContext.setLogged(true);
             UserContext.setFullName(welcomeString);
+            UserContext.setId(user.getId());
+            UserContext.setRole(user.getRole().trim());
 
-            return "/";
+            return "/index.xhtml?faces-redirect=true";
         } else {
             HttpResponseHelper.setResponse(FacesContext.getCurrentInstance(), "Wrong username or password.");
             return "/login.xhtml?faces-redirect=true";

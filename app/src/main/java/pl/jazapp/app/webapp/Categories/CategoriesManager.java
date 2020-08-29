@@ -1,7 +1,9 @@
 package pl.jazapp.app.webapp.Categories;
 
-import pl.jazapp.app.webapp.Departaments.DepartmentEntity;
-import pl.jazapp.app.webapp.Departaments.DepartmentSearchService;
+import pl.jazapp.app.Categories.CategoryCreatorService;
+import pl.jazapp.app.Categories.CategoryEditService;
+import pl.jazapp.app.Categories.CategoryEntity;
+import pl.jazapp.app.Categories.CategorySearchService;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -23,9 +25,7 @@ public class CategoriesManager {
         if(categorySearch.findCategoryById(req.getId()).isEmpty() || req.getId() == 0)
         {
             categoryCreator.addCategory(req);
-        }
-        else
-        {
+        } else {
             categoryEdit.editCategory(req);
         }
 

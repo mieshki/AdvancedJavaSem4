@@ -1,7 +1,6 @@
 package pl.jazapp.app.users;
 
-import pl.jazapp.app.webapp.Auctions.AuctionEntity;
-import pl.jazapp.app.webapp.Categories.CategoryEntity;
+import pl.jazapp.app.Auctions.AuctionEntity;
 
 import javax.persistence.*;
 import java.util.List;
@@ -35,6 +34,9 @@ public class UserEntity {
 
     @Column(name = "last_name")
     private String last_name;
+
+    @Column(name = "role")
+    private String role;
 
     public String getPassword() {
         return password;
@@ -90,5 +92,13 @@ public class UserEntity {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

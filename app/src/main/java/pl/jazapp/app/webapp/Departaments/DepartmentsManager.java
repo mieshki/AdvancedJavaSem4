@@ -1,13 +1,13 @@
 package pl.jazapp.app.webapp.Departaments;
 
-import pl.jazapp.app.users.UserEntity;
-import pl.jazapp.app.users.UserLoginService;
+import pl.jazapp.app.Departments.DepartmentCreatorService;
+import pl.jazapp.app.Departments.DepartmentEditService;
+import pl.jazapp.app.Departments.DepartmentEntity;
+import pl.jazapp.app.Departments.DepartmentSearchService;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @Named

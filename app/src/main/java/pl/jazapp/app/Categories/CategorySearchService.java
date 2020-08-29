@@ -1,4 +1,4 @@
-package pl.jazapp.app.webapp.Categories;
+package pl.jazapp.app.Categories;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
