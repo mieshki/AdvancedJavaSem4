@@ -1,9 +1,12 @@
 package pl.jazapp.app.Auctions;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import pl.jazapp.app.users.UserEntity;
 import pl.jazapp.app.Categories.CategoryEntity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -46,6 +49,10 @@ public class AuctionEntity {
 
     @OneToMany(mappedBy = "auction_id", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<PhotoEntity> photos;
+
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(mappedBy = "auction_id", cascade = CascadeType.ALL)
+    private List<Auction_ParameterEntity> auction_parametersEntities;
 
     public Long getId() {
         return id;
@@ -101,5 +108,13 @@ public class AuctionEntity {
 
     public void setVersion(Long version) {
         this.version = version;
+    }
+
+    public List<Auction_ParameterEntity> getAuction_parametersEntities() {
+        return auction_parametersEntities;
+    }
+
+    public void setAuction_parametersEntities(List<Auction_ParameterEntity> auction_parametersEntities) {
+        this.auction_parametersEntities = auction_parametersEntities;
     }
 }

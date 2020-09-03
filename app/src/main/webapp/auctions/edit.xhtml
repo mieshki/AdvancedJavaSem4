@@ -16,7 +16,7 @@
         <f:viewParam name="auctionId" value="#{auctionRequest.id}"/>
     </f:metadata>
 
-    <f:event type="preRenderView" listener="#{auctionsManager.isUserOwner(auctionRequest)}"/>
+    <f:event type="preRenderView" listener="#{auctionsManager.isUserOwnerOrAdmin(auctionRequest)}"/>
 
     <h:form styleClass="form-base">
         <h:outputText value="Nazwa aukcji:" />
@@ -47,6 +47,21 @@
         <h:outputText value="Link do zdjecia3:" />
         <div class="form-group">
             <h:inputText id="photo-link-3" styleClass="form-control" a:placeholder="link zdjecia" value="#{auctionRequest.photo3}"/>
+        </div>
+
+        <div class="form-group">
+            <h:inputText id="param1-name" styleClass="form-control" a:placeholder="nazwa parametru" value="#{auctionRequest.param1Name}"/>
+            <h:inputText id="param1-value" styleClass="form-control" a:placeholder="wartosc parametru" value="#{auctionRequest.param1Value}"/>
+        </div>
+
+        <div class="form-group">
+            <h:inputText id="param2-name" styleClass="form-control" a:placeholder="nazwa parametru" value="#{auctionRequest.param2Name}"/>
+            <h:inputText id="param2-value" styleClass="form-control" a:placeholder="wartosc parametru" value="#{auctionRequest.param2Value}"/>
+        </div>
+
+        <div class="form-group">
+            <h:inputText id="param3-name" styleClass="form-control" a:placeholder="nazwa parametru" value="#{auctionRequest.param3Name}"/>
+            <h:inputText id="param3-value" styleClass="form-control" a:placeholder="wartosc parametru" value="#{auctionRequest.param3Value}"/>
         </div>
 
         <h:outputText value="Wybierz kategorie:" />

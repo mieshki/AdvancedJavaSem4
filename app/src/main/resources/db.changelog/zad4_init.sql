@@ -48,9 +48,10 @@ CREATE TABLE parameter
 
 CREATE TABLE auction_parameter
 (
-    auction_id   BIGINT       NOT NULL,
-    parameter_id BIGINT       NOT NULL,
-    value        VARCHAR(100) NOT NULL,
+    auction_parameter_id BIGINT       NOT NULL,
+    auction_id           BIGINT       NOT NULL,
+    parameter_id         BIGINT       NOT NULL,
+    value                VARCHAR(100) NOT NULL,
     FOREIGN KEY (auction_id) REFERENCES auction (id),
     FOREIGN KEY (parameter_id) REFERENCES parameter (id)
 );

@@ -12,6 +12,7 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @ApplicationScoped
@@ -69,6 +70,36 @@ public class AuctionCreatorService {
 
         auction.setPhotos(photosList);
 
+        // dodawanie parametrow
+        ParameterEntity parametr1 = new ParameterEntity();
+        Auction_ParameterEntity parameter1Value = new Auction_ParameterEntity();
+        ParameterEntity parametr2 = new ParameterEntity();
+        Auction_ParameterEntity parameter2Value = new Auction_ParameterEntity();
+        ParameterEntity parametr3 = new ParameterEntity();
+        Auction_ParameterEntity parameter3Value = new Auction_ParameterEntity();
+
+        parametr1.setName(req.getParam1Name());
+        parameter1Value.setAuction_id(auction);
+        parameter1Value.setParameter_id(parametr1);
+        parameter1Value.setValue(req.getParam1Value());
+
+        parametr2.setName(req.getParam2Name());
+        parameter2Value.setAuction_id(auction);
+        parameter2Value.setParameter_id(parametr2);
+        parameter2Value.setValue(req.getParam2Value());
+
+        parametr3.setName(req.getParam3Name());
+        parameter3Value.setAuction_id(auction);
+        parameter3Value.setParameter_id(parametr3);
+        parameter3Value.setValue(req.getParam3Value());
+
+        List<Auction_ParameterEntity> auction_parameterEntitiesList = new ArrayList<>();
+        auction_parameterEntitiesList.add(parameter1Value);
+        auction_parameterEntitiesList.add(parameter2Value);
+        auction_parameterEntitiesList.add(parameter3Value);
+
+        auction.setAuction_parametersEntities(auction_parameterEntitiesList);
+
         em.persist(auction);
     }
 
@@ -117,6 +148,46 @@ public class AuctionCreatorService {
         photosList.add(photo3);
 
         auction.setPhotos(photosList);
+
+        //edytowanie parametrow
+        // dodawanie parametrow
+        ParameterEntity parametr1 = new ParameterEntity();
+        Auction_ParameterEntity parameter1Value = new Auction_ParameterEntity();
+        ParameterEntity parametr2 = new ParameterEntity();
+        Auction_ParameterEntity parameter2Value = new Auction_ParameterEntity();
+        ParameterEntity parametr3 = new ParameterEntity();
+        Auction_ParameterEntity parameter3Value = new Auction_ParameterEntity();
+
+        parametr1.setId(actualnAuction.get().getAuction_parametersEntities().get(0).getParameter_id().getId());
+        parametr1.setName(req.getParam1Name());
+        parameter1Value.setId(actualnAuction.get().getAuction_parametersEntities().get(0).getId());
+        parameter1Value.setAuction_id(auction);
+        parameter1Value.setParameter_id(parametr1);
+        parameter1Value.setValue(req.getParam1Value());
+        parametr1.setParameter_id(Collections.singletonList(parameter1Value));
+
+        parametr2.setId(actualnAuction.get().getAuction_parametersEntities().get(1).getParameter_id().getId());
+        parametr2.setName(req.getParam2Name());
+        parameter2Value.setId(actualnAuction.get().getAuction_parametersEntities().get(1).getId());
+        parameter2Value.setAuction_id(auction);
+        parameter2Value.setParameter_id(parametr2);
+        parameter2Value.setValue(req.getParam2Value());
+        parametr2.setParameter_id(Collections.singletonList(parameter2Value));
+
+        parametr3.setId(actualnAuction.get().getAuction_parametersEntities().get(2).getParameter_id().getId());
+        parametr3.setName(req.getParam3Name());
+        parameter3Value.setId(actualnAuction.get().getAuction_parametersEntities().get(2).getId());
+        parameter3Value.setAuction_id(auction);
+        parameter3Value.setParameter_id(parametr3);
+        parameter3Value.setValue(req.getParam3Value());
+        parametr3.setParameter_id(Collections.singletonList(parameter3Value));
+
+        List<Auction_ParameterEntity> auction_parameterEntitiesList = new ArrayList<>();
+        auction_parameterEntitiesList.add(parameter1Value);
+        auction_parameterEntitiesList.add(parameter2Value);
+        auction_parameterEntitiesList.add(parameter3Value);
+
+        auction.setAuction_parametersEntities(auction_parameterEntitiesList);
 
         em.merge(auction);
     }

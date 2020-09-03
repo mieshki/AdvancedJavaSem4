@@ -3,7 +3,8 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <h:head>
     <h:outputStylesheet name="bootstrap.min.css" library="css"/>
@@ -15,8 +16,12 @@
         <h:outputText value="Tytuł aukcji: " />
         <h:outputText id="title-#{auction.id}" value="#{auction.title}" />
 
-        <h:outputText value="    " />
         <h:graphicImage id="photo-#{auction.id}" url="#{auction.photos[0].url}" width="150" height="150" />
+
+        <h:outputText value="parametry: "/>
+        <h:outputText value="#{auction.auction_parametersEntities.get(0).value} - #{auction.auction_parametersEntities.get(0).parameter_id.name} || "/>
+        <h:outputText value="#{auction.auction_parametersEntities.get(1).value} - #{auction.auction_parametersEntities.get(1).parameter_id.name} || "/>
+        <h:outputText value="#{auction.auction_parametersEntities.get(2).value} - #{auction.auction_parametersEntities.get(2).parameter_id.name} || "/>
 
         <h:link value="Edytuj" id="edit-#{auction.id}" outcome="auctions/edit.xhtml?auctionId=#{auction.id}"/><br/>
 

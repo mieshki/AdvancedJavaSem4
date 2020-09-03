@@ -11,9 +11,19 @@
 </h:head>
 
 <h:body>
-    <h:outputText value="Wszystkie Twoje aukcje: " /><Br />
+    <h:outputText value="Wylistowane wszystkie Twoje aukcje: " /><Br />
+    <ui:repeat value="#{auctionsManager.getAllUserAuctions()}" var="auction">
+        <h:outputText value="Tytuł aukcji: " />
+        <h:outputText id="title-#{auction.id}" value="#{auction.title}" />
 
-    <h:outputText value="TODO"/><br/>
+        <h:outputText value="    " />
+        <h:graphicImage id="photo-#{auction.id}" url="#{auction.photos[0].url}" width="150" height="150" />
+
+        <h:link value="Edytuj" id="edit-#{auction.id}" outcome="/auctions/edit.xhtml?auctionId=#{auction.id}"/><br/>
+
+        <h:outputText value="---------------------------------------------" /><br />
+    </ui:repeat>
+
     <h:link value="Dodaj aukcje" outcome="/auctions/edit.xhtml"/><br/>
 </h:body>
 </html>

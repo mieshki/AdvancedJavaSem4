@@ -19,6 +19,15 @@ public class AuctionRequest {
     private String photo2;
     private String photo3;
 
+    private String param1Name;
+    private String param1Value;
+
+    private String param2Name;
+    private String param2Value;
+
+    private String param3Name;
+    private String param3Value;
+
     public Long getId() {
         return id;
     }
@@ -105,5 +114,53 @@ public class AuctionRequest {
 
     public void setPhoto3(String photo3) {
         this.photo3 = photo3;
+    }
+
+    public String getParam1Name() {
+        return param1Name;
+    }
+
+    public void setParam1Name(String param1Name) {
+        this.param1Name = param1Name;
+    }
+
+    public String getParam1Value() {
+        return param1Value;
+    }
+
+    public void setParam1Value(String param1Value) {
+        this.param1Value = param1Value;
+    }
+
+    public String getParam2Name() {
+        return param2Name;
+    }
+
+    public void setParam2Name(String param2Name) {
+        this.param2Name = param2Name;
+    }
+
+    public String getParam2Value() {
+        return param2Value;
+    }
+
+    public void setParam2Value(String param2Value) {
+        this.param2Value = param2Value;
+    }
+
+    public String getParam3Name() {
+        return param3Name;
+    }
+
+    public void setParam3Name(String param3Name) {
+        this.param3Name = param3Name;
+    }
+
+    public String getParam3Value() {
+        return param3Value;
+    }
+
+    public void setParam3Value(String param3Value) {
+        this.param3Value = param3Value;
     }
 }

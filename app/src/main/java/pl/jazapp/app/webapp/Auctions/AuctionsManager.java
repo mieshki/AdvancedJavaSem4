@@ -13,6 +13,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Named
 @RequestScoped
@@ -35,19 +36,21 @@ public class AuctionsManager {
         return "/index.xhtml?faces-redirect=true";
     }
 
-    public void isUserOwner(AuctionRequest req){
-        //todo
-        /*if(req.getId() != null) {
-            if(req.getOwner_id().equals(UserContext.getId())){
-                FacesContext fc = FacesContext.getCurrentInstance();
+    public void isUserOwnerOrAdmin(AuctionRequest req){
+        if(req.getId() != null) {
+            Optional<AuctionEntity> auction = auctionSearch.findAuctionById(req.getId());
+                if(auction.isEmpty()){
+                    return;
+                }
 
-                ConfigurableNavigationHandler nav
-                        = (ConfigurableNavigationHandler)
-                        fc.getApplication().getNavigationHandler();
+                if(!auction.get().getOwner().getId().equals(UserContext.getId()) && !UserContext.getRole().contains("ADMIN")){
+                    FacesContext fc = FacesContext.getCurrentInstance();
 
-                nav.performNavigation("/index.xhtml");
-            }
-        }*/
+                    ConfigurableNavigationHandler nav = (ConfigurableNavigationHandler) fc.getApplication().getNavigationHandler();
+
+                    nav.performNavigation("/index.xhtml");
+                }
+        }
     }
 
     public List<AuctionEntity> getAllAuctions()
