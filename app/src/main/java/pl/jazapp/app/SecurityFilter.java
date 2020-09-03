@@ -1,10 +1,12 @@
 package pl.jazapp.app;
 
+import pl.jazapp.app.users.UserSearchService;
 import pl.jazapp.app.webapp.CookieHelper;
 import pl.jazapp.app.webapp.User;
 import pl.jazapp.app.webapp.UserContext;
 
 import javax.faces.application.ResourceHandler;
+import javax.inject.Inject;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebFilter;
@@ -17,13 +19,16 @@ import java.util.UUID;
 
 @WebFilter("*")
 public class SecurityFilter extends HttpFilter {
+    @Inject
+    UserSearchService userSearch;
+
     @Override
     protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
         // http://localhost:8080/app/resources/test.txt
         // let resources be possible to access without permissions
         if (isResourceRequest(req)){
             chain.doFilter(req, res);
-        } else if(isSiteOnlyForAdministrator(req) && UserContext.getRole().contains("ADMIN") && isUserLogged(req)) {
+        } else if(isSiteOnlyForAdministrator(req) && isAdministrator() && isUserLogged(req)) {
             chain.doFilter(req, res);
         } else if ((isSiteAllowed(req) || isUserLogged(req)) && !isSiteOnlyForAdministrator(req)){
             chain.doFilter(req, res);
@@ -35,6 +40,11 @@ public class SecurityFilter extends HttpFilter {
                 res.sendRedirect(req.getContextPath() + "/login.xhtml");
             }
         }
+    }
+
+    private boolean isAdministrator(){
+        UserContext.setRole(userSearch.findUser(UserContext.getId()).get().getRole().trim());
+        return UserContext.getRole().contains("ADMIN");
     }
 
     private boolean isSiteOnlyForAdministrator(HttpServletRequest req){

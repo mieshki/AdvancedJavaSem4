@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+import java.math.BigDecimal;
 
 @ApplicationScoped
 public class AuctionCreatorService {
@@ -26,8 +27,20 @@ public class AuctionCreatorService {
         var auction = new AuctionEntity();
         auction.setTitle(req.getTitle());
         auction.setDescription(req.getDescription());
-        auction.setPrice(req.getPrice());
-        auction.setCategory(categorySearch.findCategoryById(req.getCategory_id()).get());
+
+        if(req.getPrice() == null){
+            auction.setPrice(new BigDecimal(0));
+        } else {
+            auction.setPrice(req.getPrice());
+        }
+
+        var category = categorySearch.findCategoryById(req.getCategory_id());
+
+        if(category.isEmpty()){
+            return;
+        }
+
+        auction.setCategory(category.get());
         auction.setOwner(userSearch.findUser(UserContext.getId()).get());
         auction.setVersion(1L);
         auction.setPhotos_urls(req.getPhotos_urls());

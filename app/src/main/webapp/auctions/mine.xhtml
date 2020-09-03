@@ -38,11 +38,11 @@
         <h:outputText value="Kategoria aukcji: " />
         <h:outputText value="#{auction.category.name}" /> <br/>
 
-        <h:link value="Edytuj" id="edit-#{auction.id}" outcome="auctions/edit.xhtml?auctionId=#{auction.id}"/><br/>
+        <h:link value="Edytuj" id="edit-#{auction.id}" outcome="/auctions/edit.xhtml?auctionId=#{auction.id}"/><br/>
 
         <h:outputText value="---------------------------------------------" /><br />
     </ui:repeat>
 
-    <h:link value="Dodaj aukcje" outcome="auctions/edit.xhtml"/><br/>
+    <h:link value="Dodaj aukcje" outcome="/auctions/edit.xhtml"/><br/>
 </h:body>
 </html>
