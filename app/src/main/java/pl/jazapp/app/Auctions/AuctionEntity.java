@@ -5,6 +5,7 @@ import pl.jazapp.app.Categories.CategoryEntity;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Table(name = "auction")
@@ -35,8 +36,16 @@ public class AuctionEntity {
     @Column(name="version")
     private Long version;
 
-    @Column(name="photo_url")
-    private String photos_urls;
+    public List<PhotoEntity> getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(List<PhotoEntity> photos) {
+        this.photos = photos;
+    }
+
+    @OneToMany(mappedBy = "auction_id", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<PhotoEntity> photos;
 
     public Long getId() {
         return id;
@@ -92,13 +101,5 @@ public class AuctionEntity {
 
     public void setVersion(Long version) {
         this.version = version;
-    }
-
-    public String getPhotos_urls() {
-        return photos_urls;
-    }
-
-    public void setPhotos_urls(String photos_urls) {
-        this.photos_urls = photos_urls;
     }
 }

@@ -15,7 +15,9 @@ public class AuctionRequest {
     private Long category_id;
     private Long owner_id;
     private Long version;
-    private String photos_urls;
+    private String photo1;
+    private String photo2;
+    private String photo3;
 
     public Long getId() {
         return id;
@@ -73,19 +75,35 @@ public class AuctionRequest {
         this.version = version;
     }
 
-    public String getPhotos_urls() {
-        return photos_urls;
-    }
-
-    public void setPhotos_urls(String photos_urls) {
-        this.photos_urls = photos_urls;
-    }
-
     public Long getDepartment_id() {
         return department_id;
     }
 
     public void setDepartment_id(Long department_id) {
         this.department_id = department_id;
+    }
+
+    public String getPhoto1() {
+        return photo1;
+    }
+
+    public void setPhoto1(String photo1) {
+        this.photo1 = photo1;
+    }
+
+    public String getPhoto2() {
+        return photo2;
+    }
+
+    public void setPhoto2(String photo2) {
+        this.photo2 = photo2;
+    }
+
+    public String getPhoto3() {
+        return photo3;
+    }
+
+    public void setPhoto3(String photo3) {
+        this.photo3 = photo3;
     }
 }

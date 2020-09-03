@@ -1,5 +1,6 @@
 package pl.jazapp.app;
 
+import pl.jazapp.app.users.UserEntity;
 import pl.jazapp.app.users.UserSearchService;
 import pl.jazapp.app.webapp.CookieHelper;
 import pl.jazapp.app.webapp.User;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Optional;
 import java.util.UUID;
 
 @WebFilter("*")
@@ -43,7 +45,13 @@ public class SecurityFilter extends HttpFilter {
     }
 
     private boolean isAdministrator(){
-        UserContext.setRole(userSearch.findUser(UserContext.getId()).get().getRole().trim());
+        Optional<UserEntity> user = userSearch.findUser(UserContext.getId());
+        if(user.isEmpty()){
+            return false;
+        }
+
+        UserContext.setRole(user.get().getRole().trim());
+
         return UserContext.getRole().contains("ADMIN");
     }
 

@@ -11,6 +11,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @ApplicationScoped
 public class AuctionCreatorService {
@@ -21,6 +23,8 @@ public class AuctionCreatorService {
     private CategorySearchService categorySearch;
     @Inject
     private UserSearchService userSearch;
+    @Inject
+    AuctionSearchService auctionSearch;
 
     @Transactional
     public void addAuction(AuctionRequest req) {
@@ -43,7 +47,27 @@ public class AuctionCreatorService {
         auction.setCategory(category.get());
         auction.setOwner(userSearch.findUser(UserContext.getId()).get());
         auction.setVersion(1L);
-        auction.setPhotos_urls(req.getPhotos_urls());
+
+
+        //dodawanie zdjec
+        PhotoEntity photo1 = new PhotoEntity();
+        PhotoEntity photo2 = new PhotoEntity();
+        PhotoEntity photo3 = new PhotoEntity();
+
+        photo1.setUrl(req.getPhoto1());
+        photo2.setUrl(req.getPhoto2());
+        photo3.setUrl(req.getPhoto3());
+
+        photo1.setAuction_id(auction);
+        photo2.setAuction_id(auction);
+        photo3.setAuction_id(auction);
+
+        List<PhotoEntity> photosList = new ArrayList<>();
+        photosList.add(photo1);
+        photosList.add(photo2);
+        photosList.add(photo3);
+
+        auction.setPhotos(photosList);
 
         em.persist(auction);
     }
@@ -54,11 +78,45 @@ public class AuctionCreatorService {
         auction.setId(req.getId());
         auction.setTitle(req.getTitle());
         auction.setDescription(req.getDescription());
-        auction.setPrice(req.getPrice());
+
+        if(req.getPrice() == null){
+            auction.setPrice(new BigDecimal(0));
+        } else {
+            auction.setPrice(req.getPrice());
+        }
+
         auction.setCategory(categorySearch.findCategoryById(req.getCategory_id()).get());
         auction.setOwner(userSearch.findUser(UserContext.getId()).get());
         auction.setVersion(1L);
-        auction.setPhotos_urls(req.getPhotos_urls());
+
+        //edytowanie zdjec
+        PhotoEntity photo1 = new PhotoEntity();
+        PhotoEntity photo2 = new PhotoEntity();
+        PhotoEntity photo3 = new PhotoEntity();
+
+        var actualnAuction = auctionSearch.findAuctionById(req.getId());
+        if(actualnAuction.isEmpty()){
+            return;
+        }
+
+        photo1.setId(actualnAuction.get().getPhotos().get(0).getId());
+        photo2.setId(actualnAuction.get().getPhotos().get(1).getId());
+        photo3.setId(actualnAuction.get().getPhotos().get(2).getId());
+
+        photo1.setUrl(req.getPhoto1());
+        photo2.setUrl(req.getPhoto2());
+        photo3.setUrl(req.getPhoto3());
+
+        photo1.setAuction_id(auction);
+        photo2.setAuction_id(auction);
+        photo3.setAuction_id(auction);
+
+        List<PhotoEntity> photosList = new ArrayList<>();
+        photosList.add(photo1);
+        photosList.add(photo2);
+        photosList.add(photo3);
+
+        auction.setPhotos(photosList);
 
         em.merge(auction);
     }

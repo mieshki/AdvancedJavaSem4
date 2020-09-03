@@ -3,39 +3,20 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
     <h:outputStylesheet name="bootstrap.min.css" library="css"/>
 </h:head>
 
 <h:body>
-    <h:outputText value="Wszystkie dostępne aukcje" /><Br />
+    <h:outputText value="Wylistowane wszystkie dostępne aukcje: " /><Br />
     <ui:repeat value="#{auctionsManager.getAllAuctions()}" var="auction">
         <h:outputText value="Tytuł aukcji: " />
-        <h:outputText id="title-#{auction.id}" value="#{auction.title}" /> <br/>
+        <h:outputText id="title-#{auction.id}" value="#{auction.title}" />
 
-        <h:outputText value="Opis aukcji: " />
-        <h:outputText id="description-#{auction.id}" value="#{auction.description}" /> <br/>
-
-        <h:outputText value="Cena aukcji: " />
-        <h:outputText id="price-#{auction.id}" value="#{auction.price}" /> <br/>
-
-        <h:outputText value="Zdjecie aukcji: " />
-        <h:graphicImage id="photo-#{auction.id}" url="#{auction.photos_urls}" width="150" height="150" /><Br />
-
-        <h:outputText value="Parametr 1" />
-        <h:outputText value="parametr 1 - value" /> <br/>
-
-        <h:outputText value="Parametr 2" />
-        <h:outputText value="parametr 2 - value" /> <br/>
-
-        <h:outputText value="Parametr 3" />
-        <h:outputText value="parametr 3 - value" /> <br/>
-
-        <h:outputText value="Kategoria aukcji: " />
-        <h:outputText value="#{auction.category.name}" /> <br/>
+        <h:outputText value="    " />
+        <h:graphicImage id="photo-#{auction.id}" url="#{auction.photos[0].url}" width="150" height="150" />
 
         <h:link value="Edytuj" id="edit-#{auction.id}" outcome="auctions/edit.xhtml?auctionId=#{auction.id}"/><br/>
 

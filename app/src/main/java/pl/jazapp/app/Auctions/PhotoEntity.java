@@ -14,6 +14,31 @@ public class PhotoEntity {
     @Column(name = "url")
     private String url;
 
-    @Column(name = "auction_id")
-    private Long auction_id;
+    @ManyToOne
+    @JoinColumn(name = "auction_id")
+    private AuctionEntity auction_id;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public AuctionEntity getAuction_id() {
+        return auction_id;
+    }
+
+    public void setAuction_id(AuctionEntity auction_id) {
+        this.auction_id = auction_id;
+    }
 }
