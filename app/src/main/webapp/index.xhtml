@@ -19,9 +19,9 @@
         <h:graphicImage id="photo-#{auction.id}" url="#{auction.photos[0].url}" width="150" height="150" />
 
         <h:outputText value="parametry: "/>
-        <h:outputText value="#{auction.auction_parametersEntities.get(0).value} - #{auction.auction_parametersEntities.get(0).parameter_id.name} || "/>
-        <h:outputText value="#{auction.auction_parametersEntities.get(1).value} - #{auction.auction_parametersEntities.get(1).parameter_id.name} || "/>
-        <h:outputText value="#{auction.auction_parametersEntities.get(2).value} - #{auction.auction_parametersEntities.get(2).parameter_id.name} || "/>
+        <h:outputText value="#{auction.auction_parametersEntities.get(0).parameter_id.name} - #{auction.auction_parametersEntities.get(0).value} || "/>
+        <h:outputText value="#{auction.auction_parametersEntities.get(1).parameter_id.name} - #{auction.auction_parametersEntities.get(1).value} || "/>
+        <h:outputText value="#{auction.auction_parametersEntities.get(2).parameter_id.name} - #{auction.auction_parametersEntities.get(2).value} || "/>
 
         <h:link value="Edytuj" id="edit-#{auction.id}" outcome="auctions/edit.xhtml?auctionId=#{auction.id}"/><br/>
 
